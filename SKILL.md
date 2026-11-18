@@ -87,6 +87,8 @@ Panel 6  About / Contact / Refs — manufacturer, regulatory disclaimer, referen
 ```
 Tri-fold reading order (front): cover → center → right; (back when unfolded): left → center-left → center. Place the **call-to-action / key offer on the correct physical panel**.
 
+**Bi-fold (A4 folded once → 4 panels, ~148×210mm each):** page 1 outside = back cover (left) + front cover (right); page 2 inside = clinical content. See `templates/bi-fold-medical.html`.
+
 ### Consumer / corporate (benefit-led):
 ```
 Cover (hook + brand) → Problem/Pain → Solution/Offer → How it works → Proof/Testimonials(Social) → Pricing/Package → CTA + contact → Footer/legal
@@ -145,9 +147,11 @@ chromium-browser --headless=new --no-sandbox --disable-gpu \
 7. **Skipping render-QA.** Source inspection is not visual QA — render, look, fix.
 8. **Too many colors/fonts** = AI-slop. Restraint reads professional.
 
-## References
+## Local layout & ownership
 
-- `references/pharma-evidence-bone-health.md` — PubMed calcium/vitamin D/iron → pediatric bone/fracture evidence (reusable for Novalac calcium/D3, ortho/peds).
-- `references/novalac-genio-3-plus-label.md` — Novalac Genio 3 Plus label data.
+This skill is agent-owned and lives at `~/.hermes/skills/creative/gd-brochure/`. Make edits in place THERE (`SKILL.md` + `templates/`); the GitHub repo `gd-brochure-skill` is the public mirror. Reuse the bundled template for real jobs — do not rebuild brochure CSS from scratch each time. Additional evidence depth (calcium/vitD/iron → bone, Novalac Genio 3 Plus label) lives in the `pharma-detail-aids` skill's `references/` — load that skill when a medical/pharma job needs the citations.
+
+## References (bundled)
+
 - `templates/tri-fold-medical.html` — clean A4 tri-fold skeleton (panel grid, nutrition tables, evidence cards, stat boxes, dosing steps, image overlay). Fully commented: replace content + brand tokens, render to PDF.
-- `templates/tri-fold-consumer.html` — benefit-led consumer/corporate tri-fold variant.
+- `templates/bi-fold-medical.html` — A4 bi-fold (hi-fold) skeleton, 4 panels ~148×210mm each: page 1 outside (back cover + front cover), page 2 inside (clinical content + evidence + dosing). Same component library, landscape pages.

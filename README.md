@@ -9,7 +9,8 @@ One skill to design professional, non-AI-slop brochures, flyers, and print colla
 
 ## Contents
 - `SKILL.md` — full god-mode skill spec (brief → research → design system → structure → components → production → QA)
-- `templates/tri-fold-medical.html` — A4 medical tri-fold skeleton (cover, clinical problem, product overview, evidence cards, clinical scenarios, dosing, references, disclaimer)
+- `templates/tri-fold-medical.html`
+- `templates/bi-fold-medical.html` — A4 bi-fold (hi-fold) variant, 4 panels — A4 medical tri-fold skeleton (cover, clinical problem, product overview, evidence cards, clinical scenarios, dosing, references, disclaimer)
 
 ## Install
 Drop `SKILL.md` + `templates/` into the agent's skills dir:

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product Name — Bi-fold Brochure</title>
+<style>
+/* ===== GD-BROCHURE A4 HI-FOLD (BI-FOLD) MEDICAL TEMPLATE =====
+   One A4 sheet folded once → 4 panels, each ~148mm wide x 210mm tall.
+   OUTSIDE page (front cover + back cover) + INSIDE page (two content panels).
+   Replace brand tokens/content; render to PDF via headless Chromium.
+   All images base64. Height 296mm to avoid blank trailing page. */
+@page { size: A4 landscape; margin: 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --base: #0b3a4a;
+  --accent: #e8a24a;
+  --ink: #1d2733;
+  --soft: #f2f6f8;
+  --line: #d5e0e6;
+  --white: #ffffff;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Jost', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+}
+
+body { font-family: var(--sans); color: var(--ink); font-size: 10pt; line-height: 1.45; }
+
+/* ===== Two panels side by side per page; each 148mm x 210mm ===== */
+.page { display: flex; width: 297mm; height: 296mm; }
+.panel { width: 148mm; padding: 14mm 15mm; overflow: hidden; }
+
+h1, h2, h3, .display { font-family: var(--serif); line-height: 1.12; }
+h1 { font-size: 30pt; }
+h2 { font-size: 20pt; color: var(--base); margin-bottom: 3mm; }
+h3 { font-size: 13pt; color: var(--base); margin-bottom: 2mm; }
+.kicker { text-transform: uppercase; letter-spacing: .18em; font-size: 8pt; color: var(--accent); font-weight: 600; margin-bottom: 2mm; }
+.rule { height: 1px; background: var(--line); margin: 4mm 0; }
+
+/* ---- OUTSIDE: cover (right) + back cover (left) ---- */
+.cover { background: linear-gradient(160deg, var(--base) 0%, #06242f 100%); color: var(--white); display: flex; flex-direction: column; justify-content: space-between; }
+.cover h1 { color: var(--white); }
+.cover .tagline { font-size: 13pt; color: #cfe3ec; margin-top: 4mm; }
+.cover .acc { color: var(--accent); }
+.cover .foot { font-size: 8pt; color: #8fb4c4; }
+.covernum { border: 1mm solid var(--accent); border-radius: 50%; width: 15mm; height: 15mm; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 11pt; }
+.backcover { background: var(--base); color: var(--white); display: flex; flex-direction: column; justify-content: space-between; }
+.backcover h3 { color: var(--white); }
+.backcover p { font-size: 9pt; color: #cfe3ec; }
+.backcover .cta { background: var(--accent); color: var(--base); font-weight: 700; text-align: center; padding: 3.5mm; border-radius: 1.5mm; text-decoration: none; display: block; font-size: 11pt; }
+
+/* ---- Shared components ---- */
+table.nut { width: 100%; border-collapse: collapse; font-size: 8.5pt; }
+table.nut th { text-align: left; background: var(--base); color: var(--white); padding: 1.5mm 2mm; font-weight: 600; }
+table.nut td { padding: 1.4mm 2mm; border-bottom: 1px solid var(--line); }
+table.nut td:last-child { text-align: right; font-weight: 600; color: var(--base); }
+
+.evidence { border-left: 1.5mm solid var(--accent); background: var(--soft); padding: 3mm 3.5mm; margin-bottom: 3mm; }
+.evidence .claim { font-family: var(--serif); font-size: 13pt; color: var(--base); font-weight: 600; }
+.evidence .src { font-size: 7.5pt; color: #5a6b76; margin-top: 1mm; }
+.evidence .pmid { font-size: 7.5pt; color: var(--accent); font-weight: 600; }
+
+.stat { text-align: center; background: var(--base); color: var(--white); padding: 4mm; border-radius: 2mm; margin: 3mm 0; }
+.stat .num { font-family: var(--serif); font-size: 28pt; color: var(--accent); line-height: 1; }
+.stat .lbl { font-size: 8pt; letter-spacing: .08em; text-transform: uppercase; color: #cfe3ec; margin-top: 1mm; }
+
+.steps { counter-reset: step; list-style: none; }
+.steps li { counter-increment: step; position: relative; padding: 0 0 3mm 9mm; font-size: 9pt; }
+.steps li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 6mm; height: 6mm; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 600; display: flex; align-items: center; justify-content: center; font-size: 8pt; }
+
+.imglayer { height: 40mm; border-radius: 2mm; overflow: hidden; background: var(--soft); margin: 3mm 0; display: flex; align-items: center; justify-content: center; color: #5a6b76; font-size: 8pt; text-align: center; }
+.imglayer img { width: 100%; height: 100%; object-fit: cover; }
+
+.footer { margin-top: auto; font-size: 6.5pt; color: #5a6b76; border-top: 1px solid var(--line); padding-top: 1.5mm; }
+</style>
+</head>
+<body>
+
+<!-- ===== PAGE 1 — OUTSIDE (unfolded): back cover left, front cover right ===== -->
+<div class="page">
+  <!-- Back cover (left half) -->
+  <section class="panel backcover">
+    <div>
+      <div class="kicker">About / Contact</div>
+      <h3>Brand name</h3>
+      <p style="margin-top:2mm">Manufacturer, address, phone, email, medical-information line.</p>
+    </div>
+    <div>
+      <p style="margin-bottom:3mm">Call-to-action line before the fold closes:</p>
+      <a class="cta" href="#">Visit / Contact now</a>
+    </div>
+    <div class="footer" style="color:#8fb4c4; border-color:#3a6b7d;">© 2026 Brand • For healthcare professionals</div>
+  </section>
+
+  <!-- Front cover (right half) -->
+  <section class="panel cover">
+    <div class="kicker">Brand / Category</div>
+    <div>
+      <div class="covernum">1</div>
+      <h1 style="margin-top:3mm">Product<br>Name</h1>
+      <p class="tagline">One-line value proposition for the reader.</p>
+    </div>
+    <div class="foot">[logo placeholder] • [disclaimer line 1]</div>
+  </section>
+</div>
+
+<!-- ===== PAGE 2 — INSIDE: clinical content ===== -->
+<div class="page" style="page-break-before: always;">
+  <!-- Inside-left -->
+  <section class="panel">
+    <div class="kicker">The Clinical Problem</div>
+    <h2>Headline on the gap</h2>
+    <p>Why current management misses it; the single strongest number anchored in a stat box.</p>
+    <div class="stat"><div class="num">72%</div><div class="lbl">of patients <short stat></div></div>
+    <p>Nutritional / clinical intervention rationale. Doctor-grade, tight.</p>
+    <div class="rule"></div>
+    <div class="kicker">Product Overview</div>
+    <h2>What it is</h2>
+    <p>Format, age range, dosage form, key differentiator.</p>
+    <table class="nut">
+      <tr><th colspan="2">Nutritional composition</th></tr>
+      <tr><td>Energy</td><td>xxx kcal</td></tr>
+      <tr><td>Protein</td><td>x.x g</td></tr>
+      <tr><td>Calcium</td><td>xxx mg</td></tr>
+      <tr><td>Vitamin D</td><td>x.x µg</td></tr>
+      <tr><td>Iron</td><td>x.x mg</td></tr>
+    </table>
+    <div class="footer">Panel 2 • © 2026 Brand</div>
+  </section>
+
+  <!-- Inside-right -->
+  <section class="panel">
+    <div class="kicker">Evidence-Based Benefits</div>
+    <h2>Ingredient → Mechanism → Proof</h2>
+    <div class="evidence">
+      <p class="claim">Ingredient X supports Y</p>
+      <p>Mechanism sentence.</p>
+      <p class="src"><span class="pmid">[PMID 12345]</span> Study, Journal, Year — finding.</p>
+    </div>
+    <div class="evidence">
+      <p class="claim">Ingredient Z role</p>
+      <p>Mechanism sentence.</p>
+      <p class="src"><span class="pmid">[PMID 67890]</span> Study, Journal, Year — finding.</p>
+    </div>
+    <div class="rule"></div>
+    <div class="kicker">Dosing & Usage</div>
+    <h3>Daily protocol</h3>
+    <ol class="steps">
+      <li>Step / preparation one</li>
+      <li>Step / preparation two</li>
+      <li>Step / preparation three</li>
+      <li>Safety / storage note</li>
+    </ol>
+    <div class="footer">
+      <strong>Regulatory disclaimer.</strong> For HCPs. Nutritional information and educational support, not a
+      treatment or cure claim. © 2026 Brand. References: [PMID list].
+    </div>
+  </section>
+</div>
+
+</body>
+</html>
